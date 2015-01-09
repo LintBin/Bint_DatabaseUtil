@@ -2,8 +2,6 @@ package com.bint.data;
 
 import java.util.List;
 
-import com.bint.util.DataSource;
-
 public class MySQLDataBase extends DataBase{
 
 	public MySQLDataBase(DataSource dataSource) {

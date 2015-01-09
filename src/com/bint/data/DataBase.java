@@ -3,8 +3,6 @@ package com.bint.data;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.bint.util.DataSource;
-
 public abstract class DataBase {
 	public DataSource dataSource;
 	private String dbName;

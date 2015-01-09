@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.bint.dao.TableDao;
 import com.bint.data.Column;
-import com.bint.util.DataSource;
+import com.bint.data.DataSource;
 
 public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	
@@ -34,6 +34,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 		System.out.println("getAllColumnByTableName is running");
 		List<Column> result = new ArrayList<Column>();
 		String sql = "select column_name , data_type from user_tab_columns where Table_Name= ?";
+		System.out.println("sql");
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, tableName);
 		ResultSet rs = this.pstmt.executeQuery();

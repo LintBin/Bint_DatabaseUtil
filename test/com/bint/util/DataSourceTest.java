@@ -2,6 +2,8 @@ package com.bint.util;
 
 import org.junit.Test;
 
+import com.bint.data.DataSource;
+
 public class DataSourceTest {
 	private DataSource dataSource;
 	@Test

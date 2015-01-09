@@ -3,8 +3,8 @@ package com.bint.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import com.bint.data.DataSource;
 import com.bint.db.DBConnection;
-import com.bint.util.DataSource;
 
 public class TableDaoBaseImpl {
 	public DBConnection dbCon = null;

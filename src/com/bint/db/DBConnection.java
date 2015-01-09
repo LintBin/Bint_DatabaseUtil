@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.bint.util.DataSource;
+import com.bint.data.DataSource;
 
 public class DBConnection {
 	private Connection conn = null;

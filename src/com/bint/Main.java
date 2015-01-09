@@ -1,5 +1,6 @@
 package com.bint;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import com.bint.data.DataBase;
 import com.bint.data.Table;
 import com.bint.generation.Writer;
 import com.bint.util.DataBaseFactory;
-import com.bint.util.DataSource;
 
 
 public class Main {
@@ -19,7 +19,11 @@ public class Main {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		Writer writer = new Writer(tables);
+		try {
+			writer.creatJavaBean();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

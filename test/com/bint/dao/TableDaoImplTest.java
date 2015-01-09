@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.bint.dao.impl.TableDaoOracleImpl;
 import com.bint.data.Column;
-import com.bint.util.DataSource;
+import com.bint.data.DataSource;
 
 public class TableDaoImplTest {
 	private TableDaoOracleImpl tableDaoImpl;

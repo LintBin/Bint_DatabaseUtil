@@ -22,6 +22,7 @@ public class DataTypeHelper {
 	 * 		number    ---  long
 	 * 	 	clob 	  ---  byte[]
 	 *      blob      ---  byte[]
+	 *      text      ---  String
 	 * @throws TypeNotRecognizedException
 	 */
 	public static String judgeDataType(String type) throws TypeNotRecognizedException{
@@ -42,7 +43,10 @@ public class DataTypeHelper {
 			return "byte[]";
 		}if(StringUtils.equals("blob", low_result)){
 			return "byte[]";
+		}if(StringUtils.equals("text", low_result)){
+			return "String";
 		}
+		
 		throw new TypeNotRecognizedException(type);
 	}
 }

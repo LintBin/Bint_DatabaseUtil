@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bint.data.Table;
 /**
  *  È–¥¿‡
@@ -28,10 +30,13 @@ public class Writer {
 		for(Table table : tables){
 			File file = new File("javabean/" + speller.getTableName(table) + ".java");
 			file.createNewFile();
-			FileWriter fileWritter = new FileWriter("javabean/" + table.getName() + ".java", true);
+			FileWriter fileWritter = new FileWriter("javabean/" + speller.getTableName(table) + ".java", true);
 			BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
 			bufferWritter.write(speller.getTableContent(table));
 			bufferWritter.close();
+		}
+		for(Table table : tables){
+			System.out.println(table.toString());
 		}
 	}
 }

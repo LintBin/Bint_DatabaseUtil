@@ -5,7 +5,7 @@ public class MySQLInfo implements IDataBaseInfo {
 	public static final String MYSQL_URL_PART = "jdbc:mysql://localhost:3306/";
 	public static final String MYSQL_TABLE_QUERY_SQL = "select TABLE_NAME from information_schema.columns where table_schema = ? GROUP BY TABLE_NAME;";
 	public static final String MYSQL_COLUMN_QUERY_SQL = "select column_name , data_type from information_schema.columns where table_schema = ? and TABLE_NAME = ?";
-
+	public static final String QUERY_PRIMARY_KEY = "select Column_Name from information_schema.columns where table_schema = ? and TABLE_NAME = ? and column_key='pri'";
 	@Override
 	public String getUrl() {
 		return MYSQL_URL_PART;

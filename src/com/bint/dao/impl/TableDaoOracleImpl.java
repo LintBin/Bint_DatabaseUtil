@@ -8,6 +8,7 @@ import java.util.List;
 import com.bint.dao.TableDao;
 import com.bint.data.Column;
 import com.bint.data.DataSource;
+import com.bint.data.Table;
 import com.bint.db.info.OracleInfo;
 
 public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
@@ -49,7 +50,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 		this.pstmt.close();
 		return result;
 	}
-	public Column isPrimaryKey(Column column) throws SQLException{
+	public Column isPrimaryKey(Column column , Table table) throws SQLException{
 		String sql = "select * from user_constraints a, user_ind_columns b where a.index_name = b.index_name and b.table_name = ? and b.column_name = 'C_USER' and a.constraint_type = 'P';";
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, column.getName());

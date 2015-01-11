@@ -5,14 +5,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bint.dao.TableDao;
 import com.bint.data.Column;
 import com.bint.data.DataSource;
+import com.bint.data.Table;
 import com.bint.db.info.MySQLInfo;
 
 public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
+	public String dataBaseName = null;
 	public TableDaoMySQLImpl(DataSource dataSource) {
 		super(dataSource);
+		dataBaseName = dataSource.getDbName();
 	}
 	
 	@Override
@@ -40,7 +45,6 @@ public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
 	public List<String> getAllTableName() throws SQLException {
 		List<String> all = new ArrayList<String>();
 		String sql = MySQLInfo.MYSQL_TABLE_QUERY_SQL;
-		String dataBaseName = dataSource.getDbName();
 		System.out.println( "int mysql :  SQL executed is :" + sql );
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, dataBaseName);
@@ -51,6 +55,22 @@ public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
 		}
 		this.pstmt.close();
 		return all;
+	}
+
+	@Override
+	public Column isPrimaryKey(Column column ,Table table) throws SQLException {
+		String tableName = table.getName();
+		String sql = MySQLInfo.QUERY_PRIMARY_KEY;
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setString(1, dataBaseName);
+		this.pstmt.setString(2, tableName);
+		String pkColumn = null;
+		ResultSet rs = this.pstmt.executeQuery();
+		while (rs.next()) {
+			pkColumn = rs.getString(1);
+		}
+		boolean flag = StringUtils.equals(column.getName(), pkColumn);
+		return null;
 	}
 
 }

@@ -37,7 +37,7 @@ public class DataSource {
 	}
 
 	public String getUrl() {
-		System.out.println("in the DataSource , url :" + dataBaseInfo.getUrl());
+		System.out.println("in the DataSource , url :" + dataBaseInfo.getUrl() + getDbName());
 		return dataBaseInfo.getUrl() + getDbName();
 	}
 	
@@ -50,8 +50,10 @@ public class DataSource {
 		System.out.println("getDataInfo");
 		String result = xmlUtil.dbType.toLowerCase();
 		if ("mysql".equals(result)){
+			System.out.println("新建一个 mysql 数据库");
 			return new MySQLInfo();
 		}else if("oracle".equals(result)){
+			System.out.println("新建一个 oracle 数据库");
 			return new OracleInfo();
 		}else if("sqlserver".equals(result)){
 			//TODO 新建一个SQL Server的数据库

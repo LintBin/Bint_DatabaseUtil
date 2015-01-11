@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config>
-	<db-type>oracle</db-type>
-	<db-dbname>ORCL</db-dbname>
-	<db-username>test_base</db-username>
-	<db-password>11</db-password>
+	<db-type>mysql</db-type>
+	<db-dbname>bint_blog_system</db-dbname>
+	<db-username>root</db-username>
+	<db-password>admin</db-password>
 </config>

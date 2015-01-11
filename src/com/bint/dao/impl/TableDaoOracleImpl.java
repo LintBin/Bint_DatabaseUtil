@@ -8,6 +8,7 @@ import java.util.List;
 import com.bint.dao.TableDao;
 import com.bint.data.Column;
 import com.bint.data.DataSource;
+import com.bint.db.info.OracleInfo;
 
 public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	
@@ -17,7 +18,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 
 	public List<String> getAllTableName() throws SQLException {
 		List<String> all = new ArrayList<String>();
-		String sql = "SELECT table_name from tabs";
+		String sql = OracleInfo.ORACLE_TABLE_QUERY_SQL;
 		System.out.println( "SQL executed is :" + sql );
 		this.pstmt = this.conn.prepareStatement(sql);
 		ResultSet rs = this.pstmt.executeQuery();
@@ -33,7 +34,8 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 			throws SQLException {
 		System.out.println("getAllColumnByTableName is running");
 		List<Column> result = new ArrayList<Column>();
-		String sql = "select column_name , data_type from user_tab_columns where Table_Name= ?";
+//		String sql = "select column_name , data_type from user_tab_columns where Table_Name= ?";
+		String sql = OracleInfo.ORACLE_COLUMN_QUERY_SQL;
 		System.out.println("sql");
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, tableName);

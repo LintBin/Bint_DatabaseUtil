@@ -17,7 +17,6 @@ public class TableDaoMySQLImplTest {
 		try {
 			tableNames = tableDao.getAllTableName();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for(String tableName : tableNames){

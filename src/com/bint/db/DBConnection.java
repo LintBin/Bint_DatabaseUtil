@@ -5,7 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.bint.data.DataSource;
-
+/**
+ * 数据库链接类
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午10:58:06
+ * @version:  V1.0
+ */
 public class DBConnection {
 	private Connection conn = null;
 	private DataSource dataSource;

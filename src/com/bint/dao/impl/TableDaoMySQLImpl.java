@@ -12,7 +12,12 @@ import com.bint.data.Column;
 import com.bint.data.DataSource;
 import com.bint.data.Table;
 import com.bint.db.info.MySQLInfo;
-
+/**
+ * 针对MySQL的表数据库访问层
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午10:51:46
+ * @version:  V1.0
+ */
 public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
 	public String dataBaseName = null;
 	public TableDaoMySQLImpl(DataSource dataSource) {

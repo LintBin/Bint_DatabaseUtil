@@ -1,5 +1,11 @@
 package com.bint.util;
 
+/**
+ * 数据库的相关信息
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午10:56:36
+ * @version:  V1.0
+ */
 public class DriverInfoUtil {
 	public static final String ORACLED_DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
 	public static final String MYSQL_DRIVER_NAME = "com.mysql.jdbc.Driver";

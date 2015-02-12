@@ -6,13 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.bint.data.Table;
 /**
  * 书写类
- * @author Administrator
- *
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午11:00:42
+ * @version:  V1.0
  */
 public class Writer {
 	List<Table> tables = null;

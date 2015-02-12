@@ -10,7 +10,12 @@ import com.bint.data.Column;
 import com.bint.data.DataSource;
 import com.bint.data.Table;
 import com.bint.db.info.OracleInfo;
-
+/**
+ * 针对Oracle的表数据库访问层
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午10:52:25
+ * @version:  V1.0
+ */
 public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	
 	public TableDaoOracleImpl(DataSource dataSource) {

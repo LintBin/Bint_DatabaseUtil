@@ -5,7 +5,12 @@ import java.sql.PreparedStatement;
 
 import com.bint.data.DataSource;
 import com.bint.db.DBConnection;
-
+/**
+ * 表的数据访问层实现类
+ * @author  linhongbin
+ * @data:  2015年2月12日 上午10:50:50
+ * @version:  V1.0
+ */
 public class TableDaoBaseImpl {
 	public DBConnection dbCon = null;
 	public PreparedStatement pstmt = null;

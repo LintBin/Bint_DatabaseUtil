@@ -28,10 +28,8 @@ public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
 	@Override
 	public List<Column> getAllColumnByTableName(String tableName)
 			throws SQLException {
-		System.out.println("getAllColumnByTableName is running");
 		List<Column> result = new ArrayList<Column>();
 		String sql = MySQLInfo.MYSQL_COLUMN_QUERY_SQL;
-		System.out.println("sql");
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, dataSource.getDbName());
 		this.pstmt.setString(2, tableName);
@@ -50,7 +48,6 @@ public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {
 	public List<String> getAllTableName() throws SQLException {
 		List<String> all = new ArrayList<String>();
 		String sql = MySQLInfo.MYSQL_TABLE_QUERY_SQL;
-		System.out.println( "int mysql :  SQL executed is :" + sql );
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, dataBaseName);
 		ResultSet rs = this.pstmt.executeQuery();

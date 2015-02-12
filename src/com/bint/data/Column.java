@@ -1,19 +1,15 @@
 package com.bint.data;
 
-
 public class Column {
 	private String name;
 	private String type;
 	private boolean isForeignKey;
 	private String tableName;
-	
-	public Column(String tableName){
+
+	public Column(String tableName) {
 		this.tableName = tableName;
 	}
-	
-	
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -38,13 +34,10 @@ public class Column {
 		this.isForeignKey = isForeignKey;
 	}
 
-
-
-
 	@Override
 	public String toString() {
 		return "Column [name=" + name + ", type=" + type + ", isForeignKey="
 				+ isForeignKey + ", tableName=" + tableName + "]";
 	}
-	
+
 }

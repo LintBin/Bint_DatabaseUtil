@@ -5,5 +5,4 @@ public interface IDataBaseInfo {
 	public String getDriverName();
 	public String getTablesQuerySql();
 	public String getColumnquerySql();
-	
 }

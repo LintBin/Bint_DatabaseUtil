@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.bint.dao.TableDao;
 import com.bint.data.Column;
+import com.bint.data.Constraint;
 import com.bint.data.DataSource;
 import com.bint.data.Table;
 import com.bint.db.info.OracleInfo;
@@ -38,9 +39,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	@Override
 	public List<Column> getAllColumnByTableName(String tableName)
 			throws SQLException {
-		System.out.println("getAllColumnByTableName is running");
 		List<Column> result = new ArrayList<Column>();
-//		String sql = "select column_name , data_type from user_tab_columns where Table_Name= ?";
 		String sql = OracleInfo.ORACLE_COLUMN_QUERY_SQL;
 		System.out.println("sql");
 		this.pstmt = this.conn.prepareStatement(sql);
@@ -66,5 +65,26 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 			column.setForeignKey(true);
 		}
 		return column;
+	}
+	
+	/**
+	 * 获得该表主键作为的约束
+	 * @param tableName
+	 * @throws SQLException
+	 * @return List<Constraint>
+	 * @author linhongbin
+	 */
+	public List<Constraint> getConstriantName(String tableName) throws SQLException{
+		String sql = OracleInfo.ORACLE_COLUMN_QUERY_SQL;
+		List<Constraint> result = new ArrayList<Constraint>();
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setString(1, tableName);
+		ResultSet rs = this.pstmt.executeQuery();
+		while (rs.next()) {
+			Constraint constraint = new Constraint();
+			constraint.setContraintName(rs.getString(1));
+			result.add(constraint);
+		}
+		return result;
 	}
 }

@@ -10,4 +10,10 @@ public class Constraint {
 	public void setContraintName(String contraintName) {
 		this.contraintName = contraintName;
 	}
+
+	@Override
+	public String toString() {
+		return "Constraint [contraintName=" + contraintName + "]";
+	}
+	
 }

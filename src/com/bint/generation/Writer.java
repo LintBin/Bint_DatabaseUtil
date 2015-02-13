@@ -27,6 +27,7 @@ public class Writer {
 		File dir = new File("javabean");
 		dir.mkdir();
 		for(Table table : tables){
+			//新建相应的java类
 			File file = new File("javabean/" + speller.getTableName(table) + ".java");
 			file.createNewFile();
 			FileWriter fileWritter = new FileWriter("javabean/" + speller.getTableName(table) + ".java", true);

@@ -9,4 +9,5 @@ public class XMLUtilTest {
 		xmlUtil = new XMLUtil();
 		System.out.println("name :" + xmlUtil.dbName);
 	}
+	
 }

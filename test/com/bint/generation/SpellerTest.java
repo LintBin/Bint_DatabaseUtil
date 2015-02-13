@@ -1,7 +1,5 @@
 package com.bint.generation;
 
-import java.sql.SQLException;
-
 import org.junit.Test;
 
 import com.bint.data.DataBase;
@@ -16,7 +14,7 @@ public class SpellerTest {
 		String result = null;
 		try {
 			result = speller.getTableContent(dataBase.getTables().get(1));
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(result);

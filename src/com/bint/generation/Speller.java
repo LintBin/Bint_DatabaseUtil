@@ -1,5 +1,7 @@
 package com.bint.generation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -26,8 +28,10 @@ public class Speller {
 	 * 根据一个表来生成它对应的javabean里面的文字
 	 * @param table
 	 * @return String
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static String getTableContent(Table table){
+	public static String getTableContent(Table table) throws FileNotFoundException, IOException{
 		System.out.println("table: " + table.getName() );
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(getAnnotation(table));
@@ -47,8 +51,10 @@ public class Speller {
 	 * 		private int age;
 	 * @param table
 	 * @return StringBuffer
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	private static StringBuffer getProperty(Table table){
+	private static StringBuffer getProperty(Table table) throws FileNotFoundException, IOException{
 		StringBuffer stringBuffer = new StringBuffer();
 		for (Column column : table.getList()){
 			stringBuffer.append(ONE_TAB);
@@ -92,9 +98,11 @@ public class Speller {
 	 * 得到方法的写法
 	 * @param table
 	 * @return String
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 * @throws TypeNotRecognizedException 
 	 */
-	private static String getMethod(Table table){
+	private static String getMethod(Table table) throws FileNotFoundException, IOException{
 		List<Column> columns = table.getList();
 		StringBuffer stringBuffer = new StringBuffer();
 		for (Column column : columns){

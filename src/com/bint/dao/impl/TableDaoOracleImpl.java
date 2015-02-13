@@ -36,6 +36,8 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 		this.pstmt.close();
 		return all;
 	}
+	
+	
 	@Override
 	public List<Column> getAllColumnByTableName(String tableName)
 			throws SQLException {
@@ -54,6 +56,14 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 		this.pstmt.close();
 		return result;
 	}
+	
+	/**
+	 * FIXME 待修复，实际上无法实现(sql语句有误)
+	 * 重载方法
+	 * @param column
+	 * @param table
+	 * @throws SQLException
+	 */
 	public Column isPrimaryKey(Column column , Table table) throws SQLException{
 		String sql = "select * from user_constraints a, user_ind_columns b where a.index_name = b.index_name and b.table_name = ? and b.column_name = 'C_USER' and a.constraint_type = 'P';";
 		this.pstmt = this.conn.prepareStatement(sql);
@@ -75,7 +85,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	 * @author linhongbin
 	 */
 	public List<Constraint> getConstriantName(String tableName) throws SQLException{
-		String sql = OracleInfo.ORACLE_COLUMN_QUERY_SQL;
+		String sql = OracleInfo.ORACLE_CONSTRAIN_NAME_QUERY_SQL;
 		List<Constraint> result = new ArrayList<Constraint>();
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, tableName);

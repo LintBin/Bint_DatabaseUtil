@@ -9,13 +9,16 @@ import com.bint.data.DataTypeHelper;
 import com.bint.data.Table;
 import com.bint.exception.TypeNotRecognizedException;
 /**
- * TODO 拼写要被书写进java文件里面的内容
+ * 拼写要被书写进java文件里面的内容
  * @author  BintLin
  * @data:  2015年1月8日 下午3:09:51
  * @version:  V1.0
  */
 public class Speller {
 	private static final String NEW_LINE = "\n";
+	private static final String ONE_TAB = "    ";
+	private static final String SPACE = " ";
+	private static final String TWO_TAB = ONE_TAB + ONE_TAB;
 	public static String getTableName (Table table){
 		return getAapitalizeFomat(table.getName());
 	}
@@ -27,10 +30,11 @@ public class Speller {
 	public static String getTableContent(Table table){
 		System.out.println("table: " + table.getName() );
 		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(getAnnotation(table));
 		stringBuffer.append("public class ");
 		//插入类名
 		stringBuffer.append(StringUtils.capitalize(getTableName(table)));
-		stringBuffer.append("{");
+		stringBuffer.append(SPACE + "{");
 		stringBuffer.append(NEW_LINE);
 		stringBuffer.append(getProperty(table));
 		stringBuffer.append(getMethod(table));
@@ -47,7 +51,7 @@ public class Speller {
 	private static StringBuffer getProperty(Table table){
 		StringBuffer stringBuffer = new StringBuffer();
 		for (Column column : table.getList()){
-			stringBuffer.append("       ");
+			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("private ");
 			//判断返回数据库中的数据类型所对应的Java类型,并插入StringBuffer
 			try {
@@ -60,10 +64,11 @@ public class Speller {
 			stringBuffer.append(";");
 			stringBuffer.append(NEW_LINE);
 		}
+		stringBuffer.append(NEW_LINE);
 		return stringBuffer;
 	}
 	/**
-	 * TODO 格式化属性，去掉_，并将属性改为驼峰写法(首字母小写)
+	 * 格式化属性，去掉_，并将属性改为驼峰写法(首字母小写)
 	 *  FORM_CODE -- formCode
 	 * @param property
 	 * @return String
@@ -84,7 +89,7 @@ public class Speller {
 	}
 	/**
 	 * 
-	 * TODO 得到方法的写法
+	 * 得到方法的写法
 	 * @param table
 	 * @return String
 	 * @throws TypeNotRecognizedException 
@@ -103,43 +108,60 @@ public class Speller {
 			
 			
 			/*************************set 方法****************************/
-			stringBuffer.append("       ");
+			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(camelCase);
 			stringBuffer.append(" " + "set");
 			stringBuffer.append(getAapitalizeFomat(columnName));
-			stringBuffer.append(" (String ");
+			stringBuffer.append("(String ");
 			stringBuffer.append(propertyFomat(column.getName()));
-			stringBuffer.append(")" + "{" + NEW_LINE);
-			stringBuffer.append("           this." + propertyFomat(columnName) + " = " +propertyFomat(columnName));
-			stringBuffer.append(";" + NEW_LINE + "       }" + NEW_LINE);
+			stringBuffer.append(")" + SPACE + "{" + NEW_LINE);
+			stringBuffer.append(TWO_TAB+"this." + propertyFomat(columnName) + " = " +propertyFomat(columnName));
+			stringBuffer.append(";" + NEW_LINE + ONE_TAB + "}" + NEW_LINE);
+			stringBuffer.append(NEW_LINE);
 			
 			/*********************get 方法 ******************************/
-			stringBuffer.append("       ");
+			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(getAapitalizeFomat(column.getName()));
-			stringBuffer.append(" " + "get");
+			stringBuffer.append("get");
 			stringBuffer.append(getAapitalizeFomat(column.getName()));
 			stringBuffer.append("()");
-			stringBuffer.append("{" + NEW_LINE);
-			stringBuffer.append("           ");
+			stringBuffer.append(SPACE + "{" + NEW_LINE);
+			stringBuffer.append(TWO_TAB);
 			stringBuffer.append("return ");
 			stringBuffer.append("this.");
 			stringBuffer.append(propertyFomat(column.getName()));
 			stringBuffer.append(";" + NEW_LINE);
-			stringBuffer.append("       }" + NEW_LINE);
+			stringBuffer.append(ONE_TAB +"}" + NEW_LINE);
+			stringBuffer.append(NEW_LINE);
 		}
 		stringBuffer.append(NEW_LINE + "}");
 		return stringBuffer.toString();
 	}
 	/**
-	 * TODO 返回这个String的驼峰写下(首字母大写),例如:
+	 *  返回这个String的驼峰写下(首字母大写),例如:
 	 * WF_FORM_PRINT_TEMPLET -- WfFormPrintTemplet
 	 * @param string
 	 * @return String
 	 */
 	private static String getAapitalizeFomat(String string){
 		return StringUtils.capitalize(propertyFomat(string));
+	}
+	
+	/**
+	 * 获得该类的注释，注释为:
+	 *  	//对应的的表为T_table_name
+	 *    ps:表名大写大小写不变
+	 * @return String
+	 * @author linhongbin
+	 */
+	private static String getAnnotation(Table table){
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("//对应的表为");
+		stringBuffer.append(table.getName());
+		stringBuffer.append(NEW_LINE);
+		return stringBuffer.toString();
 	}
 }
  

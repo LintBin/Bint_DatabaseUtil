@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import com.bint.data.Table;
 /**
@@ -14,8 +14,8 @@ import com.bint.data.Table;
  * @version:  V1.0
  */
 public class Writer {
-	List<Table> tables = null;
-	public Writer(List<Table> tables){
+	Map<String,Table> tables = null;
+	public Writer(Map<String,Table> tables){
 		this.tables = tables;
 	}
 	/**
@@ -26,7 +26,7 @@ public class Writer {
 		Speller speller = new Speller();
 		File dir = new File("javabean");
 		dir.mkdir();
-		for(Table table : tables){
+		/*for(Table table : tables){
 			//新建相应的java类
 			File file = new File("javabean/" + speller.getTableName(table) + ".java");
 			file.createNewFile();
@@ -34,9 +34,15 @@ public class Writer {
 			BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
 			bufferWritter.write(speller.getTableContent(table));
 			bufferWritter.close();
-		}
-		for(Table table : tables){
-			System.out.println(table.toString());
+		}*/
+		for(String keyName:tables.keySet()){
+			Table table = tables.get(keyName);
+			File file = new File("javabean/" + speller.getTableName(table) + ".java");
+			file.createNewFile();
+			FileWriter fileWritter = new FileWriter("javabean/" + speller.getTableName(table) + ".java", true);
+			BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+			bufferWritter.write(speller.getTableContent(table));
+			bufferWritter.close();
 		}
 	}
 }

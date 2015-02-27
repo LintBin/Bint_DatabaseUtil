@@ -1,23 +1,33 @@
 package com.bint.data;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
-import com.bint.data.DataBase;
-import com.bint.data.Table;
 import com.bint.util.DataBaseFactory;
 
 public class MySQLDataBaseTest {
+	
 	@Test
-	public void test() throws SQLException{
+	public void test() throws SQLException {
 		System.out.println("run");
 		DataBase mysql = DataBaseFactory.getDataBase();
-		List<Table> tables = mysql.getTables();
+		Map<String,Table> tables = mysql.getTables();
 		System.out.println("size:" + tables.size());
-		for(Table table : tables ){
-			System.out.println(table.toString());
+		for (String tableName : tables.keySet()) {
+			Table table = tables.get(tableName);
+			System.err.println(table.getName());
+		}
+	}
+
+	@Test
+	public void getTableMap() {
+		DataBase mysql = DataBaseFactory.getDataBase();
+		try {
+			mysql.getTablesMap();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

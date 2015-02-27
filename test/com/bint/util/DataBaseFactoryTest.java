@@ -1,7 +1,7 @@
 package com.bint.util;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -13,9 +13,9 @@ public class DataBaseFactoryTest {
 	public void getDataBase(){
 		DataBase dataBase = DataBaseFactory.getDataBase();
 		try {
-			List<Table> tables = dataBase.getTables();
-			for(Table table : tables){
-				System.err.println(table.toString());
+			Map<String,Table> tables = dataBase.getTables();
+			for(String tableName : tables.keySet()){
+				System.err.println(tableName);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

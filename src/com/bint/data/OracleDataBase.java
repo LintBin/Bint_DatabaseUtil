@@ -2,7 +2,9 @@ package com.bint.data;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bint.dao.TableDao;
 import com.bint.dao.impl.TableDaoOracleImpl;
@@ -21,16 +23,15 @@ public class OracleDataBase extends DataBase{
 		tableDao = new TableDaoOracleImpl(dataSource);
 	}
 	@Override
-	public List<Table> getTables() throws SQLException {
+	public Map<String,Table> getTables() throws SQLException {
 		List<String> tableNames = new ArrayList<String>();
 		tableNames = tableDao.getAllTableName();
-		List<Table> tables = new ArrayList<Table>() ;
+		Map<String,Table> tables = new HashMap<String,Table>() ;
 		for(String tableName : tableNames){
 			Table table = new Table();
 			table.setName(tableName);
 			table.setList(tableDao.getAllColumnByTableName(tableName));
-			tables.add(table);
-			System.out.println("table:" + table.getName());
+			tables.put(tableName,table);
 		}
 		return tables;
 	}

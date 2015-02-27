@@ -2,7 +2,7 @@ package com.bint;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
 import com.bint.data.DataBase;
 import com.bint.data.Table;
@@ -18,7 +18,7 @@ import com.bint.util.DataBaseFactory;
 public class Main {
 	public static void main(String[] args) {
 		DataBase dataBase = DataBaseFactory.getDataBaseInstance();
-		List<Table> tables = null;
+		Map<String,Table> tables = null;
 		try {
 			tables = dataBase.getTables();
 		} catch (SQLException e) {

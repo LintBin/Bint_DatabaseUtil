@@ -3,6 +3,6 @@
 <config>
 	<db-type>oracle</db-type>
 	<db-dbname>ORCL</db-dbname>
-	<db-username>py_approve</db-username>
-	<db-password>11</db-password>
+	<db-username>LINUSER</db-username>
+	<db-password>linhongbin</db-password>
 </config>

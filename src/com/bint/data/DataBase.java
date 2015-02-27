@@ -1,8 +1,7 @@
 package com.bint.data;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public abstract class DataBase {
 	public DataSource dataSource;
@@ -32,7 +31,11 @@ public abstract class DataBase {
 		this.driverName = driverName;
 	}
 
-	public List<Table> getTables() throws SQLException {
+	public Map<String,Table> getTables() throws SQLException {
+		return null;
+	}
+	
+	public Map<String,Table> getTablesMap() throws SQLException {
 		return null;
 	}
 }

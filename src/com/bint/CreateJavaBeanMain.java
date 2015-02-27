@@ -10,12 +10,12 @@ import com.bint.generation.Writer;
 import com.bint.util.DataBaseFactory;
 
 /**
- * Main方法
+ * 创建JavaBean的Main方法
  * @author  linhongbin
  * @data:  2015年2月12日 上午10:57:45
  * @version:  V1.0
  */
-public class Main {
+public class CreateJavaBeanMain {
 	public static void main(String[] args) {
 		DataBase dataBase = DataBaseFactory.getDataBaseInstance();
 		Map<String,Table> tables = null;

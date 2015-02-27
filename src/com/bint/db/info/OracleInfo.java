@@ -8,7 +8,8 @@ public class OracleInfo implements IDataBaseInfo {
 	public static final String ORACLE_COLUMN_QUERY_SQL= "select column_name , data_type from user_tab_columns where Table_Name= ?";
 	//查询某个表的主键为外键的约束
 	public static final String ORACLE_CONSTRAIN_NAME_QUERY_SQL = "select constraint_name from user_constraints e where e.table_name=? and constraint_type='P'";
-	
+	//获得指定表的主键名
+	public static final String ORACLE_GET_PK_NAME = "SELECT	column_name FROM user_cons_columns A JOIN user_constraints b ON A .constraint_name = b.constraint_name WHERE A .table_name = ? AND b.constraint_type = 'P'";
 	
 	
 	@Override
@@ -21,12 +22,10 @@ public class OracleInfo implements IDataBaseInfo {
 	}
 	@Override
 	public String getTablesQuerySql() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public String getColumnquerySql() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

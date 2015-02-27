@@ -2,6 +2,7 @@ package com.bint.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 			throws SQLException {
 		List<Column> result = new ArrayList<Column>();
 		String sql = OracleInfo.ORACLE_COLUMN_QUERY_SQL;
-		System.out.println("sql");
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, tableName);
 		ResultSet rs = this.pstmt.executeQuery();
@@ -57,25 +57,6 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 		return result;
 	}
 	
-	/**
-	 * FIXME 待修复，实际上无法实现(sql语句有误)
-	 * 重载方法
-	 * @param column
-	 * @param table
-	 * @throws SQLException
-	 */
-	public Column isPrimaryKey(Column column , Table table) throws SQLException{
-		String sql = "select * from user_constraints a, user_ind_columns b where a.index_name = b.index_name and b.table_name = ? and b.column_name = 'C_USER' and a.constraint_type = 'P';";
-		this.pstmt = this.conn.prepareStatement(sql);
-		this.pstmt.setString(1, column.getName());
-		ResultSet rs = this.pstmt.executeQuery();
-		if (rs.getString(1) == null){
-			column.setForeignKey(false);
-		}else{
-			column.setForeignKey(true);
-		}
-		return column;
-	}
 	
 	/**
 	 * 获得该表主键作为的约束
@@ -95,6 +76,38 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 			constraint.setContraintName(rs.getString(1));
 			result.add(constraint);
 		}
+		this.pstmt.close();
 		return result;
+	}
+	
+	/**
+	 * @return String
+	 * @author linhongbin
+	 */
+	public String getPKName(String table){
+		
+		
+		return null;
+	}
+
+	@Override
+	public Column isPrimaryKey(Column column, Table table) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void test() throws SQLException{
+		//String sql = "CREATE TABLE class (cid NUMBER(10) NOT NULL,name VARCHAR2(30) NULL,CONSTRAINT PK_CLASS PRIMARY KEY (cid))";
+		//System.err.println(sql);
+		Statement stmt = conn.createStatement();
+		String sql = "CREATE TABLE REGISTRATION " +
+                "(id INTEGER not NULL, " +
+                " first VARCHAR(255), " + 
+                " last VARCHAR(255), " + 
+                " age INTEGER, " + 
+                " PRIMARY KEY ( id ))"; 
+		//this.pstmt = this.conn.prepareStatement(sql);
+		stmt.executeUpdate(sql);
+		//this.pstmt.close();
 	}
 }

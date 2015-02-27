@@ -3,7 +3,6 @@ package com.bint.data;
 public class Column {
 	private String name;
 	private String type;
-	private boolean isForeignKey;
 	private String tableName;
 
 	public Column(String tableName) {
@@ -26,18 +25,12 @@ public class Column {
 		this.type = type;
 	}
 
-	public boolean isForeignKey() {
-		return isForeignKey;
+	public String getTableName() {
+		return tableName;
 	}
 
-	public void setForeignKey(boolean isForeignKey) {
-		this.isForeignKey = isForeignKey;
-	}
-
-	@Override
-	public String toString() {
-		return "Column [name=" + name + ", type=" + type + ", isForeignKey="
-				+ isForeignKey + ", tableName=" + tableName + "]";
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 }

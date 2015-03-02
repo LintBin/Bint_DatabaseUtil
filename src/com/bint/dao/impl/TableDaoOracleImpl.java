@@ -105,7 +105,13 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
                 " first VARCHAR(255), " + 
                 " last VARCHAR(255), " + 
                 " age INTEGER, " + 
-                " PRIMARY KEY ( id ))"; 
+                " PRIMARY KEY ( id ))";
+		String sql2 = "CREATE TABLE student" +
+				"(sid VARCHAR(10) NOT NULL," + 
+				"cid VARCHAR(10) NOT NULL," + 
+				"name VARCHAR(30) NULL" +
+				",CONSTRAINT PK_STUDENT "
+				+ "PRIMARY KEY (sid))";
 		//this.pstmt = this.conn.prepareStatement(sql);
 		stmt.executeUpdate(sql);
 		//this.pstmt.close();

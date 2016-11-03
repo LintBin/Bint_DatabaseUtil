@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config>
-	<db-type>oracle</db-type>
-	<db-dbname>ORCL</db-dbname>
-	<db-username>py_approve</db-username>
-	<db-password>11</db-password>
+	<db-type>sqlserver</db-type>
+	<db-dbname>dbname</db-dbname>
+	<db-username>username</db-username>
+	<db-password>password</db-password>
 </config>

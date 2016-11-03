@@ -8,12 +8,12 @@ import com.bint.data.Table;
 /**
  * 
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:52:51
+ * @data:  2015å¹´2æœˆ12æ—¥ 10:52:51
  * @version:  V1.0
  */
 public interface TableDao {
 	/**
-	 * µÃµ½Ä³¸ö±íµÄËùÓĞµÄÁĞ
+	 * å¾—åˆ°æŒ‡å®šçš„è¡¨åçš„Column
 	 * @param tableName
 	 * @throws SQLException
 	 * @return List<Column>
@@ -21,13 +21,14 @@ public interface TableDao {
 	 */
 	public List<Column> getAllColumnByTableName(String tableName) throws SQLException;
 	/**
-	 * µÃµ½µ±Ç°Êı¾İ¿âµÄËùÓĞµÄ±íÃû×Ö
+	 * å¾—åˆ°æ‰€æœ‰çš„è¡¨å
 	 * @throws SQLException
 	 * @return List<String>
 	 */
 	public List<String> getAllTableName() throws SQLException;
+	
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÎªÖ÷¼ü
+	 * åˆ¤æ–­æ˜¯å¦ä¸ºä¸»é”®
 	 * @param column
 	 * @param table
 	 * @throws SQLException

@@ -6,17 +6,18 @@ import java.util.List;
 
 import com.bint.data.DataBase;
 import com.bint.data.Table;
+import com.bint.exception.NotSupportDataBaseException;
 import com.bint.generation.Writer;
 import com.bint.util.DataBaseFactory;
 
 /**
- * Main·½·¨
+ * Mainæ–¹æ³•
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:57:45
+ * @data:  2015æœˆ2æœˆ12æ—¥ 10:57:45
  * @version:  V1.0
  */
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NotSupportDataBaseException {
 		DataBase dataBase = DataBaseFactory.getDataBaseInstance();
 		List<Table> tables = null;
 		try {
@@ -24,6 +25,7 @@ public class Main {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		Writer writer = new Writer(tables);
 		try {
 			writer.creatJavaBean();

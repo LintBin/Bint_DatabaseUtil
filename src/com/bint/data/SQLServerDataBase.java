@@ -5,19 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bint.dao.TableDao;
-import com.bint.dao.impl.TableDaoOracleImpl;
-/**
- * @author  BintLin
- * @data:  2015年1月9日 14:49:58
- * @version:  V1.0
- */
-public class OracleDataBase extends DataBase{
-	private DataSource dataSource ;
-	private TableDao tableDao;
-	public OracleDataBase(DataSource dataSource) {
+import com.bint.dao.impl.TableDaoSQLServerImpl;
+
+public class SQLServerDataBase extends DataBase{
+	private TableDao tableDao ;
+	public SQLServerDataBase(DataSource dataSource) {
 		super(dataSource);
 		this.dataSource = dataSource;
-		tableDao = new TableDaoOracleImpl(dataSource);
+		tableDao = new TableDaoSQLServerImpl(dataSource);
 	}
 	@Override
 	public List<Table> getTables() throws SQLException {
@@ -33,5 +28,4 @@ public class OracleDataBase extends DataBase{
 		}
 		return tables;
 	}
-	
 }

@@ -10,15 +10,15 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bint.exception.TypeNotRecognizedException;
 /**
- * Êı¾İÀàĞÍÖúÊÖ£¬ÓÃÀ´´¦ÀíÊı¾İ¿âÖĞÏà¹ØµÄÊı¾İÀàĞÍ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author BintLin
  *
  */
 public class DataTypeHelper {
 	/**
-	 * ÅĞ¶ÏÊı¾İ¿âµÄÀàĞÍÓëJavaÀàĞÍËù¶ÔÓ¦µÄ¹ØÏµ
+	 * ç”Ÿæˆçš„javaçš„å±æ€§å¯¹åº”çš„æ•°æ®åº“ä¸­çš„ç±»å‹
 	 * @param type
-	 * @return JavaÀàĞÍÖĞËù¶ÔÓ¦µÄÀàĞÍ£¬¶ÔÓ¦¹ØÏµÈçÏÂ£º
+	 * @return Javaçš„ç±»å‹
 	 * 		data      ---  Data
 	 *  	varchar   ---  String
 	 *  	varchar2  ---  String
@@ -37,7 +37,7 @@ public class DataTypeHelper {
 		Properties prop = new Properties();
 		prop.load(new FileInputStream("src/type.properties"));
 		Enumeration<Object> es = prop.keys();
-		//´ÓPropertiesÖĞÈ¡³ökeyÈ¥±È¶Ô
+		//è¯»å–Propertiesçš„æ•°æ®
 		while(es.hasMoreElements()){
 			String lowTypeStr = (String) es.nextElement();
 			if(StringUtils.equals(lowTypeStr,lowResult)){

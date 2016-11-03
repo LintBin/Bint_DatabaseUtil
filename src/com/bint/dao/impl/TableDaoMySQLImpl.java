@@ -8,14 +8,15 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.bint.dao.TableDao;
+import com.bint.dao.impl.base.TableDaoBaseImpl;
 import com.bint.data.Column;
 import com.bint.data.DataSource;
 import com.bint.data.Table;
 import com.bint.db.info.MySQLInfo;
 /**
- * Õë¶ÔMySQLµÄ±íÊı¾İ¿â·ÃÎÊ²ã
+ * MySQLçš„æ•°æ®äº¤äº’å®ç°
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:51:46
+ * @data:  2015å¹´2æœˆ12æ—¥ 10:51:46
  * @version:  V1.0
  */
 public class TableDaoMySQLImpl extends TableDaoBaseImpl implements TableDao {

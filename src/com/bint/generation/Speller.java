@@ -11,9 +11,9 @@ import com.bint.data.DataTypeHelper;
 import com.bint.data.Table;
 import com.bint.exception.TypeNotRecognizedException;
 /**
- * Æ´Ğ´Òª±»ÊéĞ´½øjavaÎÄ¼şÀïÃæµÄÄÚÈİ
+ * javaç±»ç”Ÿæˆçš„æ‹¼å†™è§„åˆ™
  * @author  BintLin
- * @data:  2015Äê1ÔÂ8ÈÕ ÏÂÎç3:09:51
+ * @data:  2015å¹´1æœˆ8æ—¥ 1 23:09:51
  * @version:  V1.0
  */
 public class Speller {
@@ -21,11 +21,12 @@ public class Speller {
 	private static final String ONE_TAB = "    ";
 	private static final String SPACE = " ";
 	private static final String TWO_TAB = ONE_TAB + ONE_TAB;
+	
 	public static String getTableName (Table table){
 		return getAapitalizeFomat(table.getName());
 	}
 	/**
-	 * ¸ù¾İÒ»¸ö±íÀ´Éú³ÉËü¶ÔÓ¦µÄjavabeanÀïÃæµÄÎÄ×Ö
+	 * ä»è¡¨ä¸­çš„å­—æ®µè½¬æ¢æˆJavaBeané‡Œé¢çš„å†…å®¹
 	 * @param table
 	 * @return String
 	 * @throws IOException 
@@ -36,7 +37,7 @@ public class Speller {
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(getAnnotation(table));
 		stringBuffer.append("public class ");
-		//²åÈëÀàÃû
+		//å¾—åˆ°javabeané‡Œé¢çš„å†…å®¹
 		stringBuffer.append(StringUtils.capitalize(getTableName(table)));
 		stringBuffer.append(SPACE + "{");
 		stringBuffer.append(NEW_LINE);
@@ -46,7 +47,7 @@ public class Speller {
 	}
 	
 	/**
-	 * µÃµ½Ò»¸ö±íÀïÃæÊôĞÔËùÊä³öÀ´µÄÊôĞÔ,Èç£º
+	 * å¾—åˆ°å±æ€§,ä¾‹å¦‚
 	 * 		private String name;
 	 * 		private int age;
 	 * @param table
@@ -59,11 +60,12 @@ public class Speller {
 		for (Column column : table.getList()){
 			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("private ");
-			//ÅĞ¶Ï·µ»ØÊı¾İ¿âÖĞµÄÊı¾İÀàĞÍËù¶ÔÓ¦µÄJavaÀàĞÍ,²¢²åÈëStringBuffer
+			
 			try {
 				stringBuffer.append(DataTypeHelper.judgeDataType(column.getType()));
 			} catch (TypeNotRecognizedException e) {
 				e.printStackTrace();
+				stringBuffer.append(e.getType());
 			}
 			stringBuffer.append(" ");
 			stringBuffer.append(propertyFomat(column.getName()));
@@ -74,28 +76,36 @@ public class Speller {
 		return stringBuffer;
 	}
 	/**
-	 * ¸ñÊ½»¯ÊôĞÔ£¬È¥µô_£¬²¢½«ÊôĞÔ¸ÄÎªÍÕ·åĞ´·¨(Ê××ÖÄ¸Ğ¡Ğ´)
+	 * è§„èŒƒå±æ€§å
 	 *  FORM_CODE -- formCode
 	 * @param property
 	 * @return String
 	 */
 	private static String propertyFomat(String property){
-		property = StringUtils.lowerCase(property);
-		StringBuffer stringBuffer = new StringBuffer();
-		String[] strings ;
-		strings = StringUtils.split(property, "_" );
-		for(int i = 0 ; i<strings.length ; i++){
-			if( i > 0){
-				stringBuffer.append(StringUtils.capitalize(strings[i])) ;
-			}else{
-				stringBuffer.append(strings[0]);
+		property = property.replaceFirst(property.substring(0, 1), property.substring(0, 1).toLowerCase());
+		
+		//å¦‚æœä¸å­˜åœ¨"_"çš„å­—ç¬¦ï¼Œåˆ™è¯æ˜è¯¥æ•°æ®åº“ä¸­ä¸æ˜¯ä»¥"_"æ¥å‘½å,è€Œæ˜¯ä»¥é©¼å³°å†™æ³•æ¥å‘½å
+		if(property.indexOf("_") < 0){
+			//å°†é¦–å­—æ¯å˜ä¸ºå°å†™
+			return property;
+		}else{
+			property = StringUtils.lowerCase(property);
+			StringBuffer stringBuffer = new StringBuffer();
+			String[] strings ;
+			strings = StringUtils.split(property, "_" );
+			for(int i = 0 ; i<strings.length ; i++){
+				if( i > 0){
+					stringBuffer.append(StringUtils.capitalize(strings[i])) ;
+				}else{
+					stringBuffer.append(strings[0]);
+				}
 			}
+			return stringBuffer.toString();
 		}
-		return stringBuffer.toString();
 	}
 	/**
 	 * 
-	 * µÃµ½·½·¨µÄĞ´·¨
+	 * æ–¹æ³•
 	 * @param table
 	 * @return String
 	 * @throws IOException 
@@ -112,10 +122,11 @@ public class Speller {
 				camelCase = DataTypeHelper.judgeDataType(column.getType());
 			} catch (TypeNotRecognizedException e) {
 				e.printStackTrace();
+				camelCase = e.getType();
 			}
 			
 			
-			/*************************set ·½·¨****************************/
+			/*************************set æ–¹æ³•****************************/
 			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(camelCase);
@@ -128,7 +139,7 @@ public class Speller {
 			stringBuffer.append(";" + NEW_LINE + ONE_TAB + "}" + NEW_LINE);
 			stringBuffer.append(NEW_LINE);
 			
-			/*********************get ·½·¨ ******************************/
+			/*********************get æ–¹æ³• ******************************/
 			stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(getAapitalizeFomat(column.getName()));
@@ -148,7 +159,7 @@ public class Speller {
 		return stringBuffer.toString();
 	}
 	/**
-	 *  ·µ»ØÕâ¸öStringµÄÍÕ·åĞ´ÏÂ(Ê××ÖÄ¸´óĞ´),ÀıÈç:
+	 *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Stringï¿½ï¿½ï¿½Õ·ï¿½Ğ´ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ğ´),ï¿½ï¿½ï¿½ï¿½:
 	 * WF_FORM_PRINT_TEMPLET -- WfFormPrintTemplet
 	 * @param string
 	 * @return String
@@ -158,15 +169,14 @@ public class Speller {
 	}
 	
 	/**
-	 * »ñµÃ¸ÃÀàµÄ×¢ÊÍ£¬×¢ÊÍÎª:
-	 *  	//¶ÔÓ¦µÄµÄ±íÎªT_table_name
-	 *    ps:±íÃû´óĞ´´óĞ¡Ğ´²»±ä
+	 * è¡¨åçš„æ³¨è§£
+	 *  	//è¡¨å_table_name
 	 * @return String
 	 * @author linhongbin
 	 */
 	private static String getAnnotation(Table table){
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("//¶ÔÓ¦µÄ±íÎª");
+		stringBuffer.append("//è¡¨å");
 		stringBuffer.append(table.getName());
 		stringBuffer.append(NEW_LINE);
 		return stringBuffer.toString();

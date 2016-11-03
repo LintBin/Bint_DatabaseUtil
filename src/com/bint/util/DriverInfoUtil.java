@@ -1,13 +1,13 @@
 package com.bint.util;
 
 /**
- * Êý¾Ý¿âµÄÏà¹ØÐÅÏ¢
+ * ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:56:36
+ * @data:  2015ï¿½ï¿½2ï¿½ï¿½12ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:56:36
  * @version:  V1.0
  */
 public class DriverInfoUtil {
-	public static final String ORACLED_DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
+	/*public static final String ORACLED_DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
 	public static final String MYSQL_DRIVER_NAME = "com.mysql.jdbc.Driver";
 	public static final String SQLLITE_DRIVER_NAME = "";
 	public static final String SQL_SERVER_DRIVER_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -16,7 +16,7 @@ public class DriverInfoUtil {
 	public static final String ORACLE_URL = "jdbc:oracle:thin:@127.0.0.1:1521:";
 	public static final String MYSQL_URL = "jdbc:mysql://localhost:3306/";
 	public static final String SQLLITE_URL="";
-	public static final String SQL_SERVER_URL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=";
+	public static final String SQL_SERVER_URL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=";*/
 
 
 }

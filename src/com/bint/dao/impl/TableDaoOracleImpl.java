@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bint.dao.TableDao;
+import com.bint.dao.impl.base.TableDaoBaseImpl;
 import com.bint.data.Column;
 import com.bint.data.Constraint;
 import com.bint.data.DataSource;
 import com.bint.data.Table;
 import com.bint.db.info.OracleInfo;
 /**
- * Õë¶ÔOracleµÄ±íÊı¾İ¿â·ÃÎÊ²ã
+ * Oracleçš„æ•°æ®äº¤äº’å±‚
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:52:25
+ * @data:  2015ï¿½ï¿½2ï¿½ï¿½12ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:52:25
  * @version:  V1.0
  */
 public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
@@ -58,8 +59,8 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	}
 	
 	/**
-	 * FIXME ´ıĞŞ¸´£¬Êµ¼ÊÉÏÎŞ·¨ÊµÏÖ(sqlÓï¾äÓĞÎó)
-	 * ÖØÔØ·½·¨
+	 * FIXME
+	 * åˆ¤æ–­æ˜¯å¦ä¸ºä¸»é”®
 	 * @param column
 	 * @param table
 	 * @throws SQLException
@@ -78,7 +79,7 @@ public class TableDaoOracleImpl extends TableDaoBaseImpl implements TableDao{
 	}
 	
 	/**
-	 * »ñµÃ¸Ã±íÖ÷¼ü×÷ÎªµÄÔ¼Êø
+	 * ï¿½ï¿½Ã¸Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ô¼ï¿½ï¿½
 	 * @param tableName
 	 * @throws SQLException
 	 * @return List<Constraint>

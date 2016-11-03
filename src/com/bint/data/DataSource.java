@@ -3,6 +3,7 @@ package com.bint.data;
 import com.bint.db.info.IDataBaseInfo;
 import com.bint.db.info.MySQLInfo;
 import com.bint.db.info.OracleInfo;
+import com.bint.db.info.SQLServerInfo;
 import com.bint.util.XMLUtil;
 
 public class DataSource {
@@ -50,16 +51,13 @@ public class DataSource {
 		System.out.println("getDataInfo");
 		String result = xmlUtil.dbType.toLowerCase();
 		if ("mysql".equals(result)){
-			System.out.println("ĞÂ½¨Ò»¸ö mysql Êı¾İ¿â");
+			System.out.println("mysqlæ•°æ®åº“");
 			return new MySQLInfo();
 		}else if("oracle".equals(result)){
-			System.out.println("ĞÂ½¨Ò»¸ö oracle Êı¾İ¿â");
+			System.out.println("ï¿½Â½ï¿½Ò»ï¿½ï¿½ oracle ï¿½ï¿½İ¿ï¿½");
 			return new OracleInfo();
 		}else if("sqlserver".equals(result)){
-			//TODO ĞÂ½¨Ò»¸öSQL ServerµÄÊı¾İ¿â
-			
-		}else if("sqllit".equals(result)){
-			//TODO ĞÂ½¨Ò»¸öSQLListµÄÊı¾İ¿â
+			return new SQLServerInfo();
 		}
 		return null;
 	}

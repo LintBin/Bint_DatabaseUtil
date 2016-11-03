@@ -4,24 +4,27 @@ import com.bint.data.DataBase;
 import com.bint.data.DataSource;
 import com.bint.data.MySQLDataBase;
 import com.bint.data.OracleDataBase;
+import com.bint.data.SQLServerDataBase;
+import com.bint.exception.NotSupportDataBaseException;
 /**
- * Êı¾İ¿â¹¤³§
+ * æ•°æ®åº“å·¥å‚ç±»
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:55:19
+ * @data:  2015å¹´2æœˆ12æ—¥    10:55:19
  * @version:  V1.0
  */
 public class DataBaseFactory {
 	private static DataSource dataSource = new DataSource();
 	
-	public static DataBase getDataBaseInstance(){
+	public static DataBase getDataBaseInstance() throws NotSupportDataBaseException{
 		return getDataBase();
 	}
 	/**
-	 * µÃµ½Êı¾İ¿âÊµÀı
+	 * å¾—åˆ°æ•°æ®åº“
 	 * @return DataBase
 	 * @author linhongbin
+	 * @throws NotSupportDataBaseException 
 	 */
-	public static DataBase getDataBase(){
+	public static DataBase getDataBase() throws NotSupportDataBaseException{
 		XMLUtil xmlUtil = new XMLUtil();
 		String result = xmlUtil.dbType.toLowerCase();
 		if ("mysql".equals(result)){
@@ -29,12 +32,9 @@ public class DataBaseFactory {
 		}else if("oracle".equals(result)){
 			return new OracleDataBase(dataSource);
 		}else if("sqlserver".equals(result)){
-			//TODO ĞÂ½¨Ò»¸öSQL ServerµÄÊı¾İ¿â
-			
-		}else if("sqllit".equals(result)){
-			//TODO ĞÂ½¨Ò»¸öSQLListµÄÊı¾İ¿â
+			return new SQLServerDataBase(dataSource);
 		}
-		return null;
+		throw new NotSupportDataBaseException();
 	}
 
 }

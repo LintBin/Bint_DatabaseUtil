@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import com.bint.data.DataSource;
 /**
- * Êı¾İ¿âÁ´½ÓÀà
+ * æ•°æ®åº“çš„è¿æ¥
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç10:58:06
+ * @data:  2015å¹´2æœˆ12æ—¥  10:58:06
  * @version:  V1.0
  */
 public class DBConnection {

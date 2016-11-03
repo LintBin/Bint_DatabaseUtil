@@ -8,9 +8,9 @@ import java.util.List;
 
 import com.bint.data.Table;
 /**
- * ÊéĞ´Àà
+ * æ§åˆ¶å†™å…¥æ–‡ä»¶çš„ç±»
  * @author  linhongbin
- * @data:  2015Äê2ÔÂ12ÈÕ ÉÏÎç11:00:42
+ * @data:  2015å¹´2æœˆ12æ—¥ 11:00:42
  * @version:  V1.0
  */
 public class Writer {
@@ -18,8 +18,9 @@ public class Writer {
 	public Writer(List<Table> tables){
 		this.tables = tables;
 	}
+	
 	/**
-	 * ÀûÓÃtablesÉú³Éjavabean
+	 * ç”Ÿæˆjavabean
 	 * @throws IOException
 	 */
 	public void creatJavaBean() throws IOException{
@@ -27,7 +28,7 @@ public class Writer {
 		File dir = new File("javabean");
 		dir.mkdir();
 		for(Table table : tables){
-			//ĞÂ½¨ÏàÓ¦µÄjavaÀà
+			//ç”Ÿæˆæ–‡ä»¶
 			File file = new File("javabean/" + speller.getTableName(table) + ".java");
 			file.createNewFile();
 			FileWriter fileWritter = new FileWriter("javabean/" + speller.getTableName(table) + ".java", true);

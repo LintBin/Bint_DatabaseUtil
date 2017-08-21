@@ -159,7 +159,6 @@ public class Speller {
 		return stringBuffer.toString();
 	}
 	/**
-	 *  �������String���շ�д��(����ĸ��д),����:
 	 * WF_FORM_PRINT_TEMPLET -- WfFormPrintTemplet
 	 * @param string
 	 * @return String

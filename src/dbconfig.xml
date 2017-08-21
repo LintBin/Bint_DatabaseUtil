@@ -2,7 +2,7 @@
 
 <config>
 	<db-type>sqlserver</db-type>
-	<db-dbname>dbname</db-dbname>
-	<db-username>username</db-username>
-	<db-password>password</db-password>
+	<db-dbname>JYDB</db-dbname>
+	<db-username>jydb</db-username>
+	<db-password>jydb</db-password>
 </config>

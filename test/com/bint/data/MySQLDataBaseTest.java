@@ -3,6 +3,7 @@ package com.bint.data;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.bint.exception.NotSupportDataBaseException;
 import org.junit.Test;
 
 import com.bint.data.DataBase;
@@ -11,7 +12,7 @@ import com.bint.util.DataBaseFactory;
 
 public class MySQLDataBaseTest {
 	@Test
-	public void test() throws SQLException{
+	public void test() throws SQLException, NotSupportDataBaseException {
 		System.out.println("run");
 		DataBase mysql = DataBaseFactory.getDataBase();
 		List<Table> tables = mysql.getTables();

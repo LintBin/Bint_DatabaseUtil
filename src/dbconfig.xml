@@ -2,9 +2,9 @@
 
 <config>
 	<db-type>sqlserver</db-type>
-	<db-dbname>JYDB</db-dbname>
-	<db-username>jydb</db-username>
-	<db-password>jydb</db-password>
-	<db-host>localhost</db-host>
-	<db-port>1433</db-port>
+	<db-dbname>your-dbname</db-dbname>
+	<db-username>your-username</db-username>
+	<db-password>your-password</db-password>
+	<db-host>your-host</db-host>
+	<db-port>your-port</db-port>
 </config>

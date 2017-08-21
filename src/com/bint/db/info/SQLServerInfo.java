@@ -1,16 +1,24 @@
 package com.bint.db.info;
 
 
+import com.bint.util.XMLUtil;
+
 public class SQLServerInfo implements IDataBaseInfo{
+
+	private XMLUtil xmlUtil;
 	
 	
 	public static final String SQL_SERVER_TABLE_QUERY_SQL = "select name from sysobjects where xtype='U'";
 	public static final String SQL_SERVER_COLUMN_QUERY_SQL = "select name ,xtype from syscolumns where id = object_id(?) ;";
-	public static final String SQL_SERVER_URL_PAR = "jdbc:sqlserver://localhost:1433;databaseName=";
+	public static String SQL_SERVER_URL_PAR = "jdbc:sqlserver://#{host}:#{port};databaseName=";
 	public static final String SQL_SERVER_DRIVER_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	
 	@Override
 	public String getUrl() {
+
+		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{host}",xmlUtil.dbHost);
+		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{port}", xmlUtil.port);
+
 		return SQL_SERVER_URL_PAR;
 	}
 

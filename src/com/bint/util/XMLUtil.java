@@ -5,9 +5,7 @@ import java.io.File;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 /**
- * XML的工具类
  * @author  linhongbin
- * @data:  2015年2月12日 上午10:57:28
  * @version:  V1.0
  */
 public class XMLUtil {
@@ -17,6 +15,8 @@ public class XMLUtil {
 	public static String dbName;
 	public static String dbUsername;
 	public static String dbPassword;
+	public static String dbHost;
+	public static String port;
 
 	public XMLUtil() {
 		try {
@@ -26,9 +26,10 @@ public class XMLUtil {
 			e.printStackTrace();
 		}
 		dbType = doc.select("db-type").text();
-		System.out.println("db-type:" + dbType);
 		dbName = doc.select("db-dbname").text();
 		dbPassword = doc.select("db-password").text();
 		dbUsername = doc.select("db-username").text();
+		dbHost = doc.select("db-host").text();
+		port = doc.select("db-port").text();
 	}
 }

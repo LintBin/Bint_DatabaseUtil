@@ -37,6 +37,8 @@ public class DataSource {
 		return XMLUtil.dbName;
 	}
 
+
+
 	public String getUrl() {
 		System.out.println("in the DataSource , url :" + dataBaseInfo.getUrl() + getDbName());
 		return dataBaseInfo.getUrl() + getDbName();
@@ -54,7 +56,7 @@ public class DataSource {
 			System.out.println("mysql数据库");
 			return new MySQLInfo();
 		}else if("oracle".equals(result)){
-			System.out.println("�½�һ�� oracle ��ݿ�");
+			System.out.println("oracle 数据库");
 			return new OracleInfo();
 		}else if("sqlserver".equals(result)){
 			return new SQLServerInfo();

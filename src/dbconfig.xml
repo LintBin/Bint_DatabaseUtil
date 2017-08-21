@@ -5,4 +5,6 @@
 	<db-dbname>JYDB</db-dbname>
 	<db-username>jydb</db-username>
 	<db-password>jydb</db-password>
+	<db-host>localhost</db-host>
+	<db-port>1433</db-port>
 </config>

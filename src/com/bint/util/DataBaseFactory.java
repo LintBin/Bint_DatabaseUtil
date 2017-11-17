@@ -25,8 +25,8 @@ public class DataBaseFactory {
 	 * @throws NotSupportDataBaseException 
 	 */
 	public static DataBase getDataBase() throws NotSupportDataBaseException{
-		XMLUtil xmlUtil = new XMLUtil();
-		String result = xmlUtil.dbType.toLowerCase();
+		DbConfigXMLUtil dbConfigXmlUtil = new DbConfigXMLUtil();
+		String result = dbConfigXmlUtil.dbType.toLowerCase();
 		if ("mysql".equals(result)){
 			return new MySQLDataBase(dataSource);
 		}else if("oracle".equals(result)){

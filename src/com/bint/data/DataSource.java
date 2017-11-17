@@ -4,14 +4,14 @@ import com.bint.db.info.IDataBaseInfo;
 import com.bint.db.info.MySQLInfo;
 import com.bint.db.info.OracleInfo;
 import com.bint.db.info.SQLServerInfo;
-import com.bint.util.XMLUtil;
+import com.bint.util.DbConfigXMLUtil;
 
 public class DataSource {
-	private XMLUtil xmlUtil = new XMLUtil();
+	private DbConfigXMLUtil dbConfigXmlUtil = new DbConfigXMLUtil();
 	private IDataBaseInfo dataBaseInfo= null;
 	
 	public DataSource(){
-		System.out.println("in the construction of DataSource:" + xmlUtil.dbName);
+		System.out.println("in the construction of DataSource:" + dbConfigXmlUtil.dbName);
 		dataBaseInfo = getDataInfo();
 		System.out.println("in the construction of DataSource :" + dataBaseInfo.getUrl());
 	}
@@ -19,22 +19,22 @@ public class DataSource {
 	
 	
 	
-	public XMLUtil getXmlUtil() {
-		return xmlUtil;
+	public DbConfigXMLUtil getDbConfigXmlUtil() {
+		return dbConfigXmlUtil;
 	}
 
 
 	
 	public String getUsername() {
-		return XMLUtil.dbUsername;
+		return DbConfigXMLUtil.dbUsername;
 	}
 
 	public String getPassword() {
-		return XMLUtil.dbPassword;
+		return DbConfigXMLUtil.dbPassword;
 	}
 	
 	public String getDbName(){
-		return XMLUtil.dbName;
+		return DbConfigXMLUtil.dbName;
 	}
 
 
@@ -51,7 +51,7 @@ public class DataSource {
 
 	public IDataBaseInfo getDataInfo(){
 		System.out.println("getDataInfo");
-		String result = xmlUtil.dbType.toLowerCase();
+		String result = dbConfigXmlUtil.dbType.toLowerCase();
 		if ("mysql".equals(result)){
 			System.out.println("mysql数据库");
 			return new MySQLInfo();

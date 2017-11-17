@@ -29,6 +29,7 @@ public class Main {
 		Writer writer = new Writer(tables);
 		try {
 			writer.creatJavaBean();
+			writer.createMyBatisXml();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

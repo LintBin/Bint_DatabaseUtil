@@ -1,9 +1,9 @@
 package com.bint.db.info;
 
-import com.bint.util.XMLUtil;
+import com.bint.util.DbConfigXMLUtil;
 
 public class MySQLInfo implements IDataBaseInfo {
-	private XMLUtil xmlUtil = new XMLUtil();
+	private DbConfigXMLUtil dbConfigXmlUtil = new DbConfigXMLUtil();
 
 	public static final String MYSQL_DRIVER_NAME = "com.mysql.jdbc.Driver";
 	public static String MYSQL_URL_PART = "jdbc:mysql://#{host}:#{port}/";
@@ -13,8 +13,8 @@ public class MySQLInfo implements IDataBaseInfo {
 
 	@Override
 	public String getUrl() {
-		MYSQL_URL_PART = MYSQL_URL_PART.replace("#{host}", xmlUtil.dbHost);
-		MYSQL_URL_PART = MYSQL_URL_PART.replace("#{port}", xmlUtil.port);
+		MYSQL_URL_PART = MYSQL_URL_PART.replace("#{host}", dbConfigXmlUtil.dbHost);
+		MYSQL_URL_PART = MYSQL_URL_PART.replace("#{port}", dbConfigXmlUtil.port);
 
 		return MYSQL_URL_PART;
 	}

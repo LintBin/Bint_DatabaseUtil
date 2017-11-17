@@ -1,11 +1,11 @@
 package com.bint.db.info;
 
 
-import com.bint.util.XMLUtil;
+import com.bint.util.DbConfigXMLUtil;
 
 public class SQLServerInfo implements IDataBaseInfo{
 
-	private XMLUtil xmlUtil;
+	private DbConfigXMLUtil dbConfigXmlUtil;
 	
 	
 	public static final String SQL_SERVER_TABLE_QUERY_SQL = "select name from sysobjects where xtype='U'";
@@ -16,8 +16,8 @@ public class SQLServerInfo implements IDataBaseInfo{
 	@Override
 	public String getUrl() {
 
-		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{host}",xmlUtil.dbHost);
-		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{port}", xmlUtil.port);
+		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{host}", dbConfigXmlUtil.dbHost);
+		SQL_SERVER_URL_PAR = SQL_SERVER_URL_PAR.replace("#{port}", dbConfigXmlUtil.port);
 
 		return SQL_SERVER_URL_PAR;
 	}

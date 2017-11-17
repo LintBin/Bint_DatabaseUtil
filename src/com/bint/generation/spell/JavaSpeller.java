@@ -1,9 +1,10 @@
-package com.bint.generation;
+package com.bint.generation.spell;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.bint.reader.CustomizedWordReader;
 import org.apache.commons.lang.StringUtils;
 
 import com.bint.data.Column;
@@ -16,7 +17,7 @@ import com.bint.exception.TypeNotRecognizedException;
  * @data:  2015年1月8日 1 23:09:51
  * @version:  V1.0
  */
-public class Speller {
+public class JavaSpeller extends BaseSpell{
 	private static final String NEW_LINE = "\n";
 	private static final String ONE_TAB = "    ";
 	private static final String SPACE = " ";
@@ -25,6 +26,7 @@ public class Speller {
 	public static String getTableName (Table table){
 		return getAapitalizeFomat(table.getName());
 	}
+
 	/**
 	 * 从表中的字段转换成JavaBean里面的内容
 	 * @param table
@@ -32,7 +34,7 @@ public class Speller {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	public static String getTableContent(Table table) throws FileNotFoundException, IOException{
+	public String getTableContent(Table table) throws FileNotFoundException, IOException{
 		System.out.println("table: " + table.getName() );
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(getAnnotation(table));
@@ -41,7 +43,7 @@ public class Speller {
 		stringBuffer.append(StringUtils.capitalize(getTableName(table)));
 		stringBuffer.append(SPACE + "{");
 		stringBuffer.append(NEW_LINE);
-		stringBuffer.append(getProperty(table));
+		stringBuffer.append(this.getProperty(table));
 		stringBuffer.append(getMethod(table));
 		return stringBuffer.toString();
 	}
@@ -55,7 +57,7 @@ public class Speller {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	private static StringBuffer getProperty(Table table) throws FileNotFoundException, IOException{
+	private StringBuffer getProperty(Table table) throws FileNotFoundException, IOException{
 		StringBuffer stringBuffer = new StringBuffer();
 		for (Column column : table.getList()){
 			stringBuffer.append(ONE_TAB);
@@ -68,7 +70,7 @@ public class Speller {
 				stringBuffer.append(e.getType());
 			}
 			stringBuffer.append(" ");
-			stringBuffer.append(propertyFomat(column.getName()));
+			stringBuffer.append(this.getProperty(column.getName()));
 			stringBuffer.append(";");
 			stringBuffer.append(NEW_LINE);
 		}
@@ -76,6 +78,7 @@ public class Speller {
 		return stringBuffer;
 	}
 	/**
+	 * @deprecated
 	 * 规范属性名
 	 *  FORM_CODE -- formCode
 	 * @param property
@@ -83,7 +86,7 @@ public class Speller {
 	 */
 	private static String propertyFomat(String property){
 		property = property.replaceFirst(property.substring(0, 1), property.substring(0, 1).toLowerCase());
-		
+
 		//如果不存在"_"的字符，则证明该数据库中不是以"_"来命名,而是以驼峰写法来命名
 		if(property.indexOf("_") < 0){
 			//将首字母变为小写
@@ -103,6 +106,7 @@ public class Speller {
 			return stringBuffer.toString();
 		}
 	}
+
 	/**
 	 * 
 	 * 方法
@@ -179,6 +183,20 @@ public class Speller {
 		stringBuffer.append(table.getName());
 		stringBuffer.append(NEW_LINE);
 		return stringBuffer.toString();
+	}
+
+
+	public String getProperty(String columnName){
+
+		String result = super.getInitialsCapitals(columnName);
+
+		if(super.checkInList(result, CustomizedWordReader.LINE_LIST)){
+			return result;
+		}
+
+		result = StringUtils.uncapitalise(result);
+
+		return result ;
 	}
 }
  

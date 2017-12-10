@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config>
-	<db-type>sqlserver</db-type>
-	<db-dbname>your-dbname</db-dbname>
-	<db-username>your-username</db-username>
-	<db-password>your-password</db-password>
-	<db-host>your-host</db-host>
-	<db-port>your-port</db-port>
+	<db-type>mysql</db-type>
+	<db-dbname>chatrbt</db-dbname>
+	<db-username>chatrbt</db-username>
+	<db-password>chat.12321</db-password>
+	<db-host>118.89.16.41</db-host>
+	<db-port>13336</db-port>
 </config>

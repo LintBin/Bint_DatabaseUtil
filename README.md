@@ -11,3 +11,7 @@
 详细可在src/type.properties中进行修改
 
 2、暂仅支持Oracle，MySQL，SqlServer
+
+3、可修改生成的mybatis中的xml文件里面的jdbctype，可在src/jdbc-type.properties中修改
+
+4、可定义指定的表中的字段名字转为指定的名字，可在src/customized-word中定义

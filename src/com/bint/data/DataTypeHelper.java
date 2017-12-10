@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.bint.exception.TypeNotRecognizedException;
 /**
- * ����������֣�����������ݿ�����ص��������
+ * 数据库里面的类型对应的java的类型
  * @author BintLin
  *
  */

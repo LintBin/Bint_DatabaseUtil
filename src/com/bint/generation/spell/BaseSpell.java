@@ -147,7 +147,14 @@ public class BaseSpell {
                 continue;
             }
 
-            result.append(string);
+            if( i == 0 ){
+                result.append(string);
+            }else{
+                string = string.substring(0, 1).toUpperCase() + string.substring(1);
+                result.append(string);
+            }
+
+
         }
 
         return result.toString();

@@ -9,8 +9,7 @@ import org.jsoup.nodes.Document;
  * @version:  V1.0
  */
 public class DbConfigXMLUtil {
-	private File file;
-	private Document doc;
+	private static Document doc;
 	public static String dbType;
 	public static String dbName;
 	public static String dbUsername;
@@ -18,9 +17,9 @@ public class DbConfigXMLUtil {
 	public static String dbHost;
 	public static String port;
 
-	public DbConfigXMLUtil() {
+	static {
 		try {
-			file = new File("src/dbconfig.xml");
+			File file = new File("src/dbconfig.xml");
 			doc = Jsoup.parse(file, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();

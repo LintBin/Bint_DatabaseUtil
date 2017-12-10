@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.util.List;
 
 import com.bint.data.Column;
+import com.bint.data.JdbcTypeHelper;
 import com.bint.data.Table;
 import com.bint.generation.spell.JavaSpeller;
 import com.bint.generation.spell.MapperXmlSpell;
+import com.bint.util.DbConfigXMLUtil;
 
 /**
  * 控制写入文件的类
@@ -69,8 +71,9 @@ public class Writer {
 
 			bufferWritter.write(mapperXmllSpell.getMapper());
 
-
 			bufferWritter.write(mapperXmllSpell.getResultMap());
+
+			String dbType = DbConfigXMLUtil.dbType;
 
 			for(Column column : columnList){
 
@@ -78,6 +81,14 @@ public class Writer {
 
 				word = word.replace("#{column}", column.getName());
 				word = word.replace("#{property}", mapperXmllSpell.getProperty(column.getName()));
+
+				String dbTypeInCofing = dbType + "." +  column.getType();
+				String type = JdbcTypeHelper.getJdbcType(dbTypeInCofing);
+				if(type == null){
+					System.out.println("没有" + dbTypeInCofing + "类型");
+					continue;
+				}
+				word = word.replace("#{type}" , type);
 
 				bufferWritter.write(word);
 			}

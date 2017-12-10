@@ -32,7 +32,5 @@ public abstract class DataBase {
 		this.driverName = driverName;
 	}
 
-	public List<Table> getTables() throws SQLException {
-		return null;
-	}
+	public abstract List<Table> getTables() throws SQLException;
 }

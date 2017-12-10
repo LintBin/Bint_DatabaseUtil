@@ -111,7 +111,7 @@ public class MapperXmlSpell extends BaseSpell{
     }
 
     public String getResult(){
-        String resultString = ONE_TAB + ONE_TAB + "<result column=\"#{column}\" property=\"#{property}\" jdbcType=\"INTEGER\" />" + NEW_LINE ;
+        String resultString = ONE_TAB + ONE_TAB + "<result column=\"#{column}\" property=\"#{property}\" jdbcType=\"#{type}\" />" + NEW_LINE ;
         return resultString;
     }
 

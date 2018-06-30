@@ -138,5 +138,10 @@ public class MapperXmlSpell extends BaseSpell{
         return sqlTag;
     }
 
+    public String getUpdateTag(){
+        String sql = ONE_TAB + "<update id=\"update\" >" + NEW_LINE + ONE_TAB + ONE_TAB + "update #{table} set" + ONE_TAB + ONE_TAB + ONE_TAB + "#{field} </update>" ;
+        return sql;
+    }
+
 
 }

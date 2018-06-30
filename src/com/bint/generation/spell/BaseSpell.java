@@ -9,7 +9,7 @@ import java.util.List;
  * Created by bint on 2017/8/26.
  */
 public class BaseSpell {
-    static final String NEW_LINE = "\n";
+    protected static final String NEW_LINE = "\n";
     static final String ONE_TAB = "    ";
     static final String SPACE = " ";
     static final String TWO_TAB = ONE_TAB + ONE_TAB;
@@ -169,7 +169,23 @@ public class BaseSpell {
                 return true;
             }
         }
-
         return false;
+    }
+
+    /**
+     * 内容加上间隔
+     * @param tabCount
+     * @param content
+     * @return
+     */
+    protected String generateLine(Integer tabCount , String content){
+
+        while (tabCount-1 >= 0){
+            content = ONE_TAB + content;
+            tabCount--;
+        }
+
+        return content;
+
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import com.bint.data.DataBase;
 import com.bint.data.Table;
 import com.bint.exception.NotSupportDataBaseException;
-import com.bint.generation.Writer;
+import com.bint.generation.TableWriter;
 import com.bint.util.DataBaseFactory;
 
 /**
@@ -26,7 +26,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		Writer writer = new Writer(tables);
+		TableWriter writer = new TableWriter(tables);
 		try {
 			writer.creatJavaBean();
 			writer.createMyBatisXml();

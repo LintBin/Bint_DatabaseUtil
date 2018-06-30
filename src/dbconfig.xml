@@ -8,3 +8,13 @@
 	<db-host>118.89.16.41</db-host>
 	<db-port>13336</db-port>
 </config>
+
+<!--
+<config>
+	<db-type>mysql</db-type>
+	<db-dbname>license_plate</db-dbname>
+	<db-username>root</db-username>
+	<db-password></db-password>
+	<db-host>localhost</db-host>
+	<db-port>3306</db-port>
+</config>-->

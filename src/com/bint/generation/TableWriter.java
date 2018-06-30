@@ -9,6 +9,7 @@ import java.util.List;
 import com.bint.data.Column;
 import com.bint.data.JdbcTypeHelper;
 import com.bint.data.Table;
+import com.bint.generation.spell.BaseSpell;
 import com.bint.generation.spell.JavaSpeller;
 import com.bint.generation.spell.MapperXmlSpell;
 import com.bint.util.DbConfigXMLUtil;
@@ -19,9 +20,9 @@ import com.bint.util.DbConfigXMLUtil;
  * @data:  2015年2月12日 11:00:42
  * @version:  V1.0
  */
-public class Writer {
+public class TableWriter extends BaseSpell{
 	List<Table> tables = null;
-	public Writer(List<Table> tables){
+	public TableWriter(List<Table> tables){
 		this.tables = tables;
 	}
 	
@@ -95,8 +96,28 @@ public class Writer {
 
 			bufferWritter.write(mapperXmllSpell.getResultMapEnd());
 
-
 			bufferWritter.write(mapperXmllSpell.getSql());
+
+
+
+			//update的sql
+			String updateTag = mapperXmllSpell.getUpdateTag();
+			String fieldStr = "";
+			for(Column column : columnList){
+				//fieldStr = fieldStr + "\n"  + column.getName() + " = " + "#{ " + mapperXmllSpell.getProperty(column.getName()) + "}" + ",";
+				String line = NEW_LINE + column.getName() + " = " + "#{ " + mapperXmllSpell.getProperty(column.getName()) + "}" + ",";
+				line = this.generateLine(3,line);
+
+				fieldStr = fieldStr + line;
+			}
+
+			fieldStr = fieldStr.substring(0, fieldStr.length() - 1);
+
+			updateTag = updateTag.replace("#{field}", fieldStr);
+			updateTag = updateTag.replace("#{table}", table.getName());
+			updateTag = this.generateLine(1, updateTag);
+			bufferWritter.write(updateTag);
+
 			bufferWritter.write(mapperXmllSpell.getMapperEnd());
 			bufferWritter.close();
 		}

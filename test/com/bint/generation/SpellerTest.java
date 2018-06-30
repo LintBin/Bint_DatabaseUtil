@@ -1,16 +1,18 @@
 package com.bint.generation;
 
 import com.bint.exception.NotSupportDataBaseException;
+import com.bint.generation.spell.JavaSpeller;
 import org.junit.Test;
 
 import com.bint.data.DataBase;
 import com.bint.util.DataBaseFactory;
 
 public class SpellerTest {
-	private Speller speller = new Speller();
+	private JavaSpeller speller = new JavaSpeller();
 	DataBase dataBase = DataBaseFactory.getDataBaseInstance();
 
 	public SpellerTest() throws NotSupportDataBaseException {
+
 	}
 
 	@Test

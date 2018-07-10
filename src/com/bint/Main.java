@@ -29,7 +29,7 @@ public class Main {
 		TableWriter writer = new TableWriter(tables);
 		try {
 			writer.creatJavaBean();
-			writer.createMyBatisXml();
+			writer.createMapperXml();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

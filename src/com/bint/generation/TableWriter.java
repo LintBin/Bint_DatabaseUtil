@@ -9,9 +9,8 @@ import com.bint.data.JdbcTypeHelper;
 import com.bint.data.Table;
 import com.bint.generation.spell.BaseSpell;
 import com.bint.generation.spell.JavaSpeller;
-import com.bint.generation.spell.MapperXmlSpell;
-import com.bint.util.DbConfigXMLUtil;
 import com.bint.constants.Constants;
+import com.bint.util.HumpNameUtil;
 
 /**
  * 控制写入文件的类
@@ -47,7 +46,7 @@ public class TableWriter extends BaseSpell{
 		}
 	}
 
-	public void createMyBatisXml() throws IOException {
+	/*public void createMyBatisXml() throws IOException {
 
 		String dirName = "mybatis-xml";
 		File dir = new File(dirName);
@@ -120,7 +119,7 @@ public class TableWriter extends BaseSpell{
 			bufferWritter.write(mapperXmllSpell.getMapperEnd());
 			bufferWritter.close();
 		}
-	}
+	}*/
 
 	public void createMapperXml() throws IOException {
 		String dirName = "mybatis-xml";
@@ -136,8 +135,9 @@ public class TableWriter extends BaseSpell{
 			String templateClone = new String(template);
 
 			String tableName = table.getName();
+			String humpTableName = HumpNameUtil.getHumpName(tableName);
 
-			String mapperName = tableName + "Mapper";
+			String mapperName = humpTableName + "Mapper";
 
 			//生成文件
 			String path = dirName + "/" + mapperName + ".xml";
@@ -146,16 +146,19 @@ public class TableWriter extends BaseSpell{
 			//替换mapper名字
             templateClone = templateClone.replace("#{namespace}", mapperName);
 
-
 			//替换实体名字
-            templateClone = templateClone.replace("#{baseResultType}", tableName);
+            templateClone = templateClone.replace("#{baseResultType}", humpTableName);
 
 			//更换列名字
 			String sqlDatil = this.getSqlDatil(table);
             templateClone = templateClone.replace("#{sqlDatil}", sqlDatil);
 
+			//更换列名字
+			String resultMapDetail = this.getResultMapDetail(table);
+			templateClone = templateClone.replace("#{resultMapDetail}", resultMapDetail);
 
-
+			//替换insert节点
+			templateClone = this.replaceInsert(templateClone, table);
 
 			file.createNewFile();
 
@@ -166,6 +169,34 @@ public class TableWriter extends BaseSpell{
 
 			bufferWritter.close();
 		}
+	}
+
+	private String replaceInsert(String xmlStr ,Table table){
+
+		String tableName = table.getName();
+
+		//更换表名
+		xmlStr = xmlStr.replace("#{tableName}",tableName );
+
+		String sqlDatil = this.getSqlDatil(table);
+		xmlStr = xmlStr.replace("#{columnNameList}", sqlDatil);
+
+		String propertyListStr = "";
+		List<Column> columnList = table.getList();
+		for(Column column : columnList){
+			String columnName = column.getName();
+
+			String humpName = HumpNameUtil.getPropertyHumpName(columnName);
+
+			propertyListStr = propertyListStr + "#{"+ humpName +"} ,";
+		}
+		Integer length = propertyListStr.length();
+		propertyListStr = propertyListStr.substring(0, length - 1);
+
+		xmlStr = xmlStr.replace("#{propertyList}", propertyListStr);
+
+		return xmlStr;
+
 	}
 
 	/**
@@ -207,24 +238,67 @@ public class TableWriter extends BaseSpell{
 	private String getSqlDatil(Table table){
 
 		List<Column> columnList = table.getList();
-
-
 		StringBuilder stringBuilder = new StringBuilder();
 
 		for(Column column : columnList){
 
 			String string = "`" + column.getName() + "` , ";
-
 			stringBuilder.append(string);
 		}
 
-
-		stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+		stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
 		return stringBuilder.toString();
 	}
 
 
+	private String getResultMapDetail(Table table){
 
+		String result = "";
+
+		File mapperXmlTemplateFile = new File("src/com/bint/db/info/template/ResultListTemplate");
+		InputStreamReader reader = null;
+		String line = "";
+		try {
+			reader = new InputStreamReader(new FileInputStream(mapperXmlTemplateFile), Constants.FILE_ENCODING);
+			BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
+			line = br.readLine();
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		List<Column> columnList = table.getList();
+		for(Column column : columnList){
+			String columnName = column.getName();
+
+			String propertyName = HumpNameUtil.getHumpName(columnName);
+
+			String item = line;
+
+			item = item.replace("#{columnName}" ,columnName);
+			item = item.replace("#{property}" ,propertyName);
+
+			String type = column.getType();
+			String jdbcType = JdbcTypeHelper.getMySQLJdbcType(type);
+			if(jdbcType == null){
+				System.out.println("没有" + type + "类型");
+				continue;
+			}
+
+			item = item.replace("#{jdbcType}", jdbcType);
+			result = result + item + NEW_LINE;
+		}
+
+		Integer length = result.length();
+
+		result = result.substring(0, length - 1);
+
+		return result;
+	}
 
 }

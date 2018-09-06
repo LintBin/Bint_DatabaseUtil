@@ -9,7 +9,7 @@ import java.util.Properties;
  */
 public class JdbcTypeHelper {
 
-    private static Properties prop = new Properties();;
+    private static Properties prop = new Properties();
 
     static {
 
@@ -20,7 +20,12 @@ public class JdbcTypeHelper {
         }
     }
 
-    public static String getJdbcType(String typeStr){
+    private static String getJdbcType(String typeStr){
         return prop.getProperty(typeStr);
+    }
+
+
+    public static String getMySQLJdbcType(String typeStr){
+        return prop.getProperty("mysql." + typeStr);
     }
 }

@@ -131,7 +131,7 @@ public class JavaSpeller extends BaseSpell{
 			
 			
 			/*************************set 方法****************************/
-			stringBuffer.append(ONE_TAB);
+			/*stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(camelCase);
 			stringBuffer.append(" " + "set");
@@ -141,10 +141,10 @@ public class JavaSpeller extends BaseSpell{
 			stringBuffer.append(")" + SPACE + "{" + NEW_LINE);
 			stringBuffer.append(TWO_TAB+"this." + propertyFomat(columnName) + " = " +propertyFomat(columnName));
 			stringBuffer.append(";" + NEW_LINE + ONE_TAB + "}" + NEW_LINE);
-			stringBuffer.append(NEW_LINE);
+			stringBuffer.append(NEW_LINE);*/
 			
 			/*********************get 方法 ******************************/
-			stringBuffer.append(ONE_TAB);
+			/*stringBuffer.append(ONE_TAB);
 			stringBuffer.append("public ");
 			stringBuffer.append(getAapitalizeFomat(column.getName()));
 			stringBuffer.append("get");
@@ -157,7 +157,7 @@ public class JavaSpeller extends BaseSpell{
 			stringBuffer.append(propertyFomat(column.getName()));
 			stringBuffer.append(";" + NEW_LINE);
 			stringBuffer.append(ONE_TAB +"}" + NEW_LINE);
-			stringBuffer.append(NEW_LINE);
+			stringBuffer.append(NEW_LINE);*/
 		}
 		stringBuffer.append(NEW_LINE + "}");
 		return stringBuffer.toString();

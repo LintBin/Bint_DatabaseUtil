@@ -6,9 +6,9 @@ package com.bint.data;
 public class MySQLTypeJdbcHelper {
 
     public static void main(String[] args) {
-        String str = JdbcTypeHelper.getJdbcType("mysql.int");
+        //String str = JdbcTypeHelper.getJdbcType("mysql.int");
 
-        System.out.println(str);
+       // System.out.println(str);
     }
 
 }

@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<config>
-	<db-type>mysql</db-type>
-	<db-dbname>chatrbt</db-dbname>
-	<db-username>chatrbt</db-username>
-	<db-password>chat.12321</db-password>
-	<db-host>118.89.16.41</db-host>
-	<db-port>13336</db-port>
-</config>
 
-<!--
 <config>
 	<db-type>mysql</db-type>
 	<db-dbname>license_plate</db-dbname>
@@ -17,4 +8,4 @@
 	<db-password></db-password>
 	<db-host>localhost</db-host>
 	<db-port>3306</db-port>
-</config>-->
+</config>

@@ -11,8 +11,8 @@
 
     <insert id="insert" parameterType="#{parameterType}">
         insert into
-            #{tableName]
-                (#{columnNameList)
+            #{tableName}
+                (#{columnNameList})
         values (#{propertyList})
     </insert>
 

@@ -15,3 +15,5 @@
 3、可修改生成的mybatis中的xml文件里面的jdbctype，可在src/jdbc-type.properties中修改
 
 4、可定义指定的表中的字段名字转为指定的名字，可在src/customized-word中定义
+
+5、mapper.xml文件中的命名空间和实体类包路径可在src/path-generate.properties定义

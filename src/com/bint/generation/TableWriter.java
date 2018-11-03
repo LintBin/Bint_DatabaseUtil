@@ -3,6 +3,7 @@ package com.bint.generation;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.bint.data.Column;
 import com.bint.data.JdbcTypeHelper;
@@ -127,6 +128,8 @@ public class TableWriter extends BaseSpell{
 		dir.mkdir();
 
 
+		String xmlNamespace = getXmlNamespace();
+
 
 		String template = this.getMapperXmlTemplate();
 
@@ -135,6 +138,7 @@ public class TableWriter extends BaseSpell{
 			String templateClone = new String(template);
 
 			String tableName = table.getName();
+
 			String humpTableName = HumpNameUtil.getHumpName(tableName);
 
 			String mapperName = humpTableName + "Mapper";
@@ -144,7 +148,13 @@ public class TableWriter extends BaseSpell{
 			File file = new File(path);
 
 			//替换mapper名字
-            templateClone = templateClone.replace("#{namespace}", mapperName);
+			String namespace = null;
+			if(xmlNamespace == null){
+				namespace = mapperName;
+			}else {
+				namespace = xmlNamespace + "." + mapperName;
+			}
+            templateClone = templateClone.replace("#{namespace}", namespace);
 
 			//替换实体名字
             templateClone = templateClone.replace("#{baseResultType}", humpTableName);
@@ -194,6 +204,26 @@ public class TableWriter extends BaseSpell{
 		propertyListStr = propertyListStr.substring(0, length - 1);
 
 		xmlStr = xmlStr.replace("#{propertyList}", propertyListStr);
+
+
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream("src/path-generate.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String parameterTypePath = prop.getProperty("xml.insert.parameterType");
+
+		String humpTableName = null;
+		if(parameterTypePath == null){
+			humpTableName = HumpNameUtil.getHumpName(tableName);
+		}else {
+			humpTableName = parameterTypePath + HumpNameUtil.getHumpName(tableName);
+		}
+
+		//替换实体类名字
+		xmlStr = xmlStr.replace("#{parameterType}", humpTableName);
 
 		return xmlStr;
 
@@ -249,6 +279,24 @@ public class TableWriter extends BaseSpell{
 		stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 
 		return stringBuilder.toString();
+	}
+
+
+	/**
+	 * 获取XML的命名空间
+	 * TODO 不应该每次都读取文件
+	 * @return
+	 */
+	private String getXmlNamespace(){
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream("src/path-generate.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return prop.getProperty("xml.namespace");
+
 	}
 
 

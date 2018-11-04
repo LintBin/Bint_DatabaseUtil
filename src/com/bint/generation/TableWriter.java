@@ -12,6 +12,7 @@ import com.bint.generation.spell.BaseSpell;
 import com.bint.generation.spell.JavaSpeller;
 import com.bint.constants.Constants;
 import com.bint.util.HumpNameUtil;
+import com.bint.util.XmlUtil;
 
 /**
  * 控制写入文件的类
@@ -32,10 +33,22 @@ public class TableWriter extends BaseSpell{
 	public void creatJavaBean() throws IOException{
 		JavaSpeller speller = new JavaSpeller();
 		File dir = new File("javabean");
+		if(dir.exists()){
+
+			File[] files = dir.listFiles();
+
+			for(int i=0;i<files.length;i++){
+				File file = files[i];
+				file.delete();
+			}
+
+		}
 		dir.mkdir();
 		for(Table table : tables){
 			//生成文件
 			File file = new File("javabean/" + speller.getTableName(table) + ".java");
+			Boolean exists = file.exists();
+
 			file.createNewFile();
 			FileWriter fileWritter = new FileWriter("javabean/" + speller.getTableName(table) + ".java", true);
 			BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
@@ -47,84 +60,20 @@ public class TableWriter extends BaseSpell{
 		}
 	}
 
-	/*public void createMyBatisXml() throws IOException {
-
-		String dirName = "mybatis-xml";
-		File dir = new File(dirName);
-		dir.mkdir();
-
-		for(Table table : tables){
-
-			MapperXmlSpell mapperXmllSpell = new MapperXmlSpell(table);
-
-			//生成文件
-			String path = dirName + "/" + mapperXmllSpell.getXmlName();
-			File file = new File(path);
-			file.createNewFile();
-
-			FileWriter fileWritter = new FileWriter( path, true);
-			BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-
-			List<Column> columnList = table.getList();
-
-			bufferWritter.write(mapperXmllSpell.getImport());
-
-			bufferWritter.write(mapperXmllSpell.getMapper());
-
-			bufferWritter.write(mapperXmllSpell.getResultMap());
-
-			String dbType = DbConfigXMLUtil.dbType;
-
-			for(Column column : columnList){
-
-				String word = mapperXmllSpell.getResult();
-
-				word = word.replace("#{column}", column.getName());
-				word = word.replace("#{property}", mapperXmllSpell.getProperty(column.getName()));
-
-				String dbTypeInCofing = dbType + "." +  column.getType();
-				String type = JdbcTypeHelper.getJdbcType(dbTypeInCofing);
-				if(type == null){
-					System.out.println("没有" + dbTypeInCofing + "类型");
-					continue;
-				}
-				word = word.replace("#{type}" , type);
-
-				bufferWritter.write(word);
-			}
-
-			bufferWritter.write(mapperXmllSpell.getResultMapEnd());
-
-			bufferWritter.write(mapperXmllSpell.getSql());
-
-
-
-			//update的sql
-			String updateTag = mapperXmllSpell.getUpdateTag();
-			String fieldStr = "";
-			for(Column column : columnList){
-				//fieldStr = fieldStr + "\n"  + column.getName() + " = " + "#{ " + mapperXmllSpell.getProperty(column.getName()) + "}" + ",";
-				String line = NEW_LINE + column.getName() + " = " + "#{ " + mapperXmllSpell.getProperty(column.getName()) + "}" + ",";
-				line = this.generateLine(3,line);
-
-				fieldStr = fieldStr + line;
-			}
-
-			fieldStr = fieldStr.substring(0, fieldStr.length() - 1);
-
-			updateTag = updateTag.replace("#{field}", fieldStr);
-			updateTag = updateTag.replace("#{table}", table.getName());
-			updateTag = this.generateLine(1, updateTag);
-			bufferWritter.write(updateTag);
-
-			bufferWritter.write(mapperXmllSpell.getMapperEnd());
-			bufferWritter.close();
-		}
-	}*/
-
 	public void createMapperXml() throws IOException {
 		String dirName = "mybatis-xml";
 		File dir = new File(dirName);
+
+		if(dir.exists()){
+
+			File[] files = dir.listFiles();
+
+			for(int i=0;i<files.length;i++){
+				File file = files[i];
+				file.delete();
+			}
+
+		}
 		dir.mkdir();
 
 
@@ -169,6 +118,8 @@ public class TableWriter extends BaseSpell{
 
 			//替换insert节点
 			templateClone = this.replaceInsert(templateClone, table);
+
+			templateClone = XmlUtil.format(templateClone);
 
 			file.createNewFile();
 

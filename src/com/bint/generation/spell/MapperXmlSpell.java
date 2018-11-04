@@ -24,7 +24,6 @@ public class MapperXmlSpell extends BaseSpell{
 
         StringBuffer xmlNameBuffer = new StringBuffer();
 
-
         if(super.existUnderline(tableName)){
             String[] strings ;
             strings = StringUtils.split(tableName, "_" );

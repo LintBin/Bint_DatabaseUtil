@@ -15,16 +15,11 @@ public class DataSource {
 		dataBaseInfo = getDataInfo();
 		System.out.println("in the construction of DataSource :" + dataBaseInfo.getUrl());
 	}
-	
-	
-	
-	
+
 	public DbConfigXMLUtil getDbConfigXmlUtil() {
 		return dbConfigXmlUtil;
 	}
 
-
-	
 	public String getUsername() {
 		return DbConfigXMLUtil.dbUsername;
 	}

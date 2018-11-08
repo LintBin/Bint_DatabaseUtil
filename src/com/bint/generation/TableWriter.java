@@ -72,10 +72,8 @@ public class TableWriter extends BaseSpell{
 				File file = files[i];
 				file.delete();
 			}
-
 		}
 		dir.mkdir();
-
 
 		String xmlNamespace = getXmlNamespace();
 

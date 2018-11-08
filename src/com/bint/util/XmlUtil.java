@@ -16,10 +16,12 @@ import org.xml.sax.SAXException;
  * Created by bint on 2018/11/3.
  */
 public class XmlUtil {
+    private final static DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
     private static Document parseXmlFile(String in) {
+
         try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
             DocumentBuilder db = dbf.newDocumentBuilder();
             InputSource is = new InputSource(new StringReader(in));
             return db.parse(is);
